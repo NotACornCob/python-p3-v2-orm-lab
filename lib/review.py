@@ -141,3 +141,41 @@ class Review:
         return [cls.instance_from_db(row) for row in rows]
         pass
 
+    @property
+    def year(self):
+        return self._year 
+    
+    @year.setter
+    def year(self, year):
+        if isinstance(year, int) and year >= 2000:
+            self._year = year 
+        else: 
+            raise ValueError(
+                "Must be from the year 2000 or later"
+            )
+
+    @property
+    def summary(self): 
+        return self._summary
+    
+    @summary.setter
+    def summary(self, summary):
+        if isinstance(summary,str) and len(summary) > 0:
+            self._summary = summary
+        else: 
+            raise ValueError(
+                "Must be a non-empty string"
+            )
+        
+    @property
+    def employee_id(self):
+        return self._employee_id
+    
+    @employee_id.setter
+    def employee_id(self,employee_id):
+        if type(employee_id) is int and Employee.find_by_id(employee_id):
+            self._employee_id = employee_id 
+        else: 
+            raise ValueError(
+                "employee_id must reference an employee in the database"
+            )
